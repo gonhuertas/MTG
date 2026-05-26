@@ -15,19 +15,19 @@
       "options": [
         { "color": "W", "text": "Makes sure the person with the least is still looked after." },
         { "color": "U", "text": "Uses expertise to bring things closer to perfection." },
-        { "color": "B", "text": "Gets things done without waiting to be told or helped." },
+        { "color": "B", "text": "Gets things done without needing to be told or helped." },
         { "color": "R", "text": "Says the true thing in the room that no one else will." },
         { "color": "G", "text": "Stays steady while everyone else spins." }
       ]
     },
     {
-      "q": "Where does a person's responsibility really lie?",
+      "q": "Which of these describes your view about technology?",
       "options": [
-        { "color": "W", "text": "With the people around them — we're all carrying each other." },
-        { "color": "B", "text": "With themselves first; no one else carries your weight for long." },
-        { "color": "U", "text": "With getting things right, even when that's slower and harder." },
-        { "color": "G", "text": "With the role they actually have, not the one they wish they had." },
-        { "color": "R", "text": "With being honest about what they feel, and acting on it." }
+        { "color": "U", "text": "Technology is the single most important way to build a better future." },
+        { "color": "W", "text": "Science is good but should be supervised for the benefit of everyone." },
+        { "color": "G", "text": "Too often people forget how technology can be used to destroy or exploit." },
+        { "color": "B", "text": "We should not let other people's fears of progress hold the rest of us back." },
+        { "color": "R", "text": "Innovation is best when allowed freedom for creation and self-expression." }
       ]
     },
     {

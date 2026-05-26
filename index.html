@@ -17,7 +17,7 @@
     --bg: #f6f7f9;
     --card: #ffffff;
     --radius: 16px;
-    --shadow: 0 10px 40px rgba(20,23,33,0.08), 0 2px 8px rgba(20,23,33,0.04);
+    --shadow: 0 24px 60px rgba(0,0,0,0.45), 0 6px 18px rgba(0,0,0,0.30);
   }
 
   * { box-sizing: border-box; }
@@ -25,7 +25,9 @@
   html, body {
     margin: 0;
     padding: 0;
-    background: var(--bg);
+    min-height: 100%;
+    background: #14161f;
+    background: radial-gradient(1100px 700px at 50% -10%, #2a2f47 0%, #181b27 45%, #0f1117 100%) fixed;
     color: var(--ink);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -132,6 +134,8 @@
   .options { display: flex; flex-direction: column; gap: 10px; }
 
   .option {
+    display: flex;
+    align-items: center;
     text-align: left;
     background: #fbfbfc;
     border: 1px solid var(--line);
@@ -141,10 +145,38 @@
     line-height: 1.45;
     color: var(--ink);
     cursor: pointer;
-    transition: border-color .14s ease, background .14s ease, transform .08s ease;
+    transition: border-color .16s ease, background .16s ease, transform .08s ease, box-shadow .16s ease;
   }
-  .option:hover { border-color: var(--ink); background: #fff; }
+  .option:hover { border-color: var(--ink); background: #fff; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(20,23,33,0.06); }
   .option:active { transform: scale(.992); }
+
+  /* glyph slot — collapsed until the answer is chosen, then it expands in the answer's color */
+  .opt-glyph {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: 0;
+    margin-right: 0;
+    overflow: hidden;
+    opacity: 0;
+    flex: 0 0 auto;
+    font-size: 18px;
+    line-height: 1;
+    transition: width .26s cubic-bezier(.2,.7,.2,1), margin .26s cubic-bezier(.2,.7,.2,1), opacity .2s ease;
+  }
+  .opt-text { flex: 1 1 auto; }
+
+  /* selected (post-pick) state: button adopts the answer's color */
+  .option.selected {
+    border-color: var(--opt-color);
+    background: color-mix(in srgb, var(--opt-color) 13%, #fff);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--opt-color) 22%, transparent);
+    transform: none;
+  }
+  .option.selected .opt-glyph { width: var(--glyph-w, 24px); margin-right: 11px; opacity: 1; }
+  .option.locked { cursor: default; }
+  .option.locked:not(.selected) { opacity: .5; }
 
   .back-row { margin-top: 24px; }
   .back-link {
@@ -175,12 +207,10 @@
   .result-creed { font-size: 15px; font-style: italic; color: var(--muted); margin: -6px 0 16px; line-height: 1.5; }
   .result-subhead { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin: 28px 0 10px; padding-top: 18px; border-top: 1px solid var(--line); }
 
-  .bars { margin: 26px 0 30px; display: flex; flex-direction: column; gap: 12px; }
-  .bar-row { display: grid; grid-template-columns: 64px 1fr 42px; align-items: center; gap: 12px; }
-  .bar-label { font-size: 13px; font-weight: 600; color: var(--ink); }
-  .bar-track { height: 10px; background: var(--line); border-radius: 99px; overflow: hidden; }
-  .bar-fill { height: 100%; width: 0; border-radius: 99px; transition: width .7s cubic-bezier(.2,.7,.2,1); }
-  .bar-pct { font-size: 13px; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+  .radar-wrap { display: flex; justify-content: center; margin: 4px 0 28px; }
+  .radar { width: 100%; max-width: 400px; height: auto; }
+  .radar-data { animation: radarIn .6s cubic-bezier(.2,.7,.2,1) both; }
+  @keyframes radarIn { from { opacity: 0; } to { opacity: 1; } }
 
   .footnote { font-size: 13px; color: var(--muted); line-height: 1.55; margin: 22px 0 0; }
 
@@ -193,7 +223,6 @@
     .card { padding: 30px 24px 28px; }
     h1 { font-size: 25px; }
     .question { font-size: 20px; }
-    .bar-row { grid-template-columns: 54px 1fr 40px; }
   }
 </style>
 </head>
@@ -306,21 +335,50 @@ function renderQuestion(){
     </div>
   `;
   const box = document.getElementById("opts");
+  let transitioning = false;   // block double-clicks during the reveal-then-advance pause
+
   opts.forEach(opt => {
     const b = document.createElement("button");
     b.className = "option";
-    b.textContent = opt.text;
-    if (answers[current] === opt) b.style.borderColor = "var(--ink)";
+    b.innerHTML = `<span class="opt-glyph" aria-hidden="true"></span><span class="opt-text"></span>`;
+    b.querySelector(".opt-text").textContent = opt.text;
+    // if returning to an already-answered question, show its chosen color again
+    if (answers[current] === opt) styleSelected(b, opt);
     b.onclick = () => {
+      if (transitioning) return;
       answers[current] = opt;
-      if (current < QUESTIONS.length - 1){ current++; renderQuestion(); }
-      else { renderResult(); }
+      // lock the set, light up the chosen answer in its color, then move on
+      box.querySelectorAll(".option").forEach(el => el.classList.add("locked"));
+      styleSelected(b, opt);
+      transitioning = true;
+      setTimeout(() => {
+        if (current < QUESTIONS.length - 1){ current++; renderQuestion(); }
+        else { renderResult(); }
+      }, 340);
     };
     box.appendChild(b);
   });
   document.getElementById("back").onclick = () => {
     if (current > 0){ current--; renderQuestion(); }
   };
+}
+
+// Which color(s) an option awards (single-color or an allied pair on Q1)
+function optColors(opt){ return Array.isArray(opt.colors) ? opt.colors : [opt.color]; }
+
+// Apply the chosen answer's color + glyph to its button
+function styleSelected(button, opt){
+  const cols = optColors(opt);
+  button.classList.add("selected");
+  button.style.setProperty("--opt-color", COLORS[cols[0]].hex);
+  button.style.setProperty("--glyph-w", cols.length > 1 ? "46px" : "24px");
+  if (cols.length > 1){
+    const h1 = COLORS[cols[0]].hex, h2 = COLORS[cols[1]].hex;
+    button.style.background = `linear-gradient(90deg, color-mix(in srgb, ${h1} 14%, #fff), color-mix(in srgb, ${h2} 14%, #fff))`;
+    button.style.borderColor = h2;
+  }
+  const g = button.querySelector(".opt-glyph");
+  g.innerHTML = cols.map(c => `<span style="color:${COLORS[c].hex}">${COLORS[c].glyph}</span>`).join("");
 }
 
 /* ---------- Scoring & result logic ---------- */
@@ -337,16 +395,56 @@ function tally(){
 }
 
 function classify(scores){
-  // sorted descending; ties broken randomly (shuffle before the stable sort)
+  // sorted descending; exact ties broken randomly (shuffle before the stable sort)
   const ranked = shuffle(ORDER).sort((x,y) => scores[y]-scores[x]);
   const c1 = ranked[0], c2 = ranked[1];
   const s1 = scores[c1], s2 = scores[c2];
-  const gap = s1 - s2;
+  const total = ORDER.reduce((a,c) => a + scores[c], 0) || 1;
   let mode;
-  if (gap >= 4) mode = "single";
-  else if (gap <= 1) mode = "dual";
-  else mode = "primary";           // gap of 2 or 3
-  return { ranked, c1, c2, s1, s2, gap, mode };
+  if (s1 === s2)                 mode = "equal";    // genuine tie at the top → two co-equal colors
+  else if (s2 / total < 0.18)    mode = "single";   // runner-up barely registers (<~18%) → one color
+  else                           mode = "dominant"; // clear winner with a meaningful second → dominant + secondary
+  return { ranked, c1, c2, s1, s2, total, mode };
+}
+
+// Build an SVG spider/radar chart of the full color profile.
+// Radius is normalized so the leading color reaches the rim; labels show share of all answers.
+function radarSVG(scores, topColor){
+  const cx = 190, cy = 158, R = 88, labelR = R + 22;
+  const max = Math.max(1, ...ORDER.map(c => scores[c]));
+  const total = ORDER.reduce((a,c) => a + scores[c], 0) || 1;
+  const ang = i => (-90 + i * 72) * Math.PI / 180;          // start at top, go clockwise
+  const pt = (i, rad) => [cx + rad * Math.cos(ang(i)), cy + rad * Math.sin(ang(i))];
+  const fmt = ([x,y]) => `${x.toFixed(1)},${y.toFixed(1)}`;
+
+  let grid = "";
+  [0.25, 0.5, 0.75, 1].forEach(level => {
+    grid += `<polygon points="${ORDER.map((_,i)=>fmt(pt(i, R*level))).join(" ")}" fill="none" stroke="var(--line)" stroke-width="1"/>`;
+  });
+  let spokes = "";
+  ORDER.forEach((_,i) => {
+    const [x,y] = pt(i, R);
+    spokes += `<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="var(--line)" stroke-width="1"/>`;
+  });
+  const dataPts = ORDER.map((c,i) => fmt(pt(i, R * (scores[c] / max)))).join(" ");
+  let dots = "", labels = "";
+  ORDER.forEach((c,i) => {
+    const cc = COLORS[c];
+    const [dx,dy] = pt(i, R * (scores[c] / max));
+    dots += `<circle cx="${dx.toFixed(1)}" cy="${dy.toFixed(1)}" r="4.5" fill="${cc.hex}" stroke="#fff" stroke-width="1.5"/>`;
+    const [lx,ly] = pt(i, labelR);
+    const anchor = Math.abs(lx - cx) < 6 ? "middle" : (lx > cx ? "start" : "end");
+    const pct = Math.round(scores[c] / total * 100);
+    labels += `<text x="${lx.toFixed(1)}" y="${ly.toFixed(1)}" text-anchor="${anchor}" dominant-baseline="middle" font-size="12.5" font-weight="600" fill="var(--ink)">${cc.name} <tspan fill="var(--muted)" font-weight="500">${pct}%</tspan></text>`;
+  });
+  const fill = COLORS[topColor].hex;
+  return `<svg viewBox="0 0 380 312" class="radar" role="img" aria-label="Your color profile across White, Blue, Black, Red, and Green">
+    ${grid}
+    ${spokes}
+    <polygon class="radar-data" points="${dataPts}" fill="${fill}" fill-opacity="0.18" stroke="${fill}" stroke-opacity="0.75" stroke-width="2" stroke-linejoin="round"/>
+    ${dots}
+    ${labels}
+  </svg>`;
 }
 
 function renderResult(){
@@ -366,17 +464,17 @@ function renderResult(){
     title = C1.name;
     body = `<p class="result-creed">${C1.creed}</p>
             ${paras(C1.paras)}`;
-  } else if (mode === "primary"){
-    kicker = "You are primarily";
-    title = `${C1.name}, leaning ${C2.name}`;
+  } else if (mode === "dominant"){
+    kicker = "Your dominant color is";
+    title = C1.name;
     body = `<p class="result-creed">${C1.creed}</p>
             ${paras(C1.paras)}
             <p class="result-subhead">Your secondary color — ${C2.name}</p>
             ${paras([C2.sec])}`;
-  } else { // dual
+  } else { // equal
     kicker = "You are two colors, in equal measure";
     title = `${C1.name} & ${C2.name}`;
-    body = `<p class="result-body">You don't fall cleanly into one philosophy — you genuinely live by two, in roughly equal measure. Here's each of them in full.</p>
+    body = `<p class="result-body">Your top two colors came out tied — you don't fall cleanly into one philosophy, but genuinely live by two. Here's each of them in full.</p>
             <p class="result-subhead">${C1.name}</p>
             <p class="result-creed">${C1.creed}</p>
             ${paras(C1.paras)}
@@ -393,16 +491,8 @@ function renderResult(){
     return `<div class="${cls}" style="background:${cc.hex}" title="${cc.name}">${cc.glyph}</div>`;
   }).join("");
 
-  // bars for every color
-  const bars = ORDER.map(c => {
-    const cc = COLORS[c];
-    const pct = Math.round((scores[c]/total)*100);
-    return `<div class="bar-row">
-      <span class="bar-label">${cc.name}</span>
-      <div class="bar-track"><div class="bar-fill" data-w="${pct}" style="background:${cc.hex}"></div></div>
-      <span class="bar-pct">${pct}%</span>
-    </div>`;
-  }).join("");
+  // spider/radar chart of the full color profile
+  const radar = radarSVG(scores, c1);
 
   // "learn more" links to Mark Rosewater's full article for each reported color
   const learnLinks = reported.map(c =>
@@ -419,17 +509,12 @@ function renderResult(){
     <h1 class="result-title">${title}</h1>
     <div class="result-swatches">${swatches}</div>
     ${body}
-    <div class="bars">${bars}</div>
+    <p class="result-subhead">Your full profile</p>
+    <div class="radar-wrap">${radar}</div>
     ${learnMore}
     <button class="btn btn-ghost" id="retake">Take the quiz again</button>
-    <p class="footnote">Based on Mark Rosewater's "My Words" articles describing each color's philosophy. Your full profile is shown above — most people are a blend.</p>
+    <p class="footnote">Based on Mark Rosewater's "My Words" articles describing each color's philosophy. The chart shows your share of answers across all five colors — most people are a blend.</p>
   `;
-  // animate bars
-  requestAnimationFrame(() => {
-    document.querySelectorAll(".bar-fill").forEach(el => {
-      el.style.width = el.getAttribute("data-w") + "%";
-    });
-  });
   document.getElementById("retake").onclick = () => {
     answers.fill(null);
     current = 0;
