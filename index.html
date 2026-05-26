@@ -172,6 +172,8 @@
   .result-title { font-size: 28px; margin: 0 0 16px; line-height: 1.2; }
   .result-body { font-size: 16px; line-height: 1.65; color: #3a3d45; margin: 0 0 14px; }
   .result-body strong { color: var(--ink); }
+  .result-creed { font-size: 15px; font-style: italic; color: var(--muted); margin: -6px 0 16px; line-height: 1.5; }
+  .result-subhead { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin: 28px 0 10px; padding-top: 18px; border-top: 1px solid var(--line); }
 
   .bars { margin: 26px 0 30px; display: flex; flex-direction: column; gap: 12px; }
   .bar-row { display: grid; grid-template-columns: 64px 1fr 42px; align-items: center; gap: 12px; }
@@ -181,6 +183,11 @@
   .bar-pct { font-size: 13px; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
 
   .footnote { font-size: 13px; color: var(--muted); line-height: 1.55; margin: 22px 0 0; }
+
+  .result-learn { margin: 4px 0 24px; padding: 16px 18px; background: #fbfbfc; border: 1px solid var(--line); border-radius: 12px; display: flex; flex-direction: column; gap: 8px; }
+  .result-learn .learn-label { font-size: 14px; color: var(--muted); }
+  .result-learn .learn-link { font-size: 15px; font-weight: 600; color: var(--ink); text-decoration: none; width: fit-content; border-bottom: 1px solid var(--line); transition: border-color .14s ease; }
+  .result-learn .learn-link:hover { border-color: var(--ink); }
 
   @media (max-width: 520px) {
     .card { padding: 30px 24px 28px; }
@@ -199,126 +206,65 @@
 /* ---------- Color metadata ---------- */
 const COLORS = {
   W: { name: "White", varc: "--w", hex: "#d4af37", glyph: "☀",
+       url: "https://magic.wizards.com/en/news/making-magic/my-words-white",
        creed: "Peace and prosperity through order, morality, and the group.",
-       blurb: "You believe the world can be better than it is, and that the way there is putting the needs of the group ahead of your own. You value morality, fairness, structure, and community — a society where no one is left to suffer." },
+       paras: [
+         "You believe the world doesn't have to be full of suffering — that peace and prosperity are genuinely within reach if people will put the needs of the group ahead of their own. Where others treat human selfishness as a fixed fact, you see a society that can be shaped toward fairness. Faced with almost any situation, your instinct is to ask not \"what do I want?\" but \"what does the group need?\"",
+         "You trust structure to get there: clear rules, a shared sense of right and wrong, and institutions that reward doing good and discourage doing harm. You'd rather raise the floor for everyone than the ceiling for a lucky few, and a stranger you'll never meet still has a real claim on you. You hold yourself to standards even when they cost you something, because cutting a corner \"just this once\" is, to you, a step away from the world you're trying to build.",
+         "Your great strength is conviction paired with preparation — give you time and you can build an answer to almost any problem, and you can lay your head down at night without regret. The flip side is rigidity: your answers are made in advance, so a threat you didn't see coming can catch you flat-footed, and your refusal to do the expedient-but-wrong thing sometimes lets problems you could have ended come back around. Others may read you as controlling or naive; you read it as the honest price of caring about everyone."
+       ],
+       sec: "There's a strong current of White in you as well — a pull toward fairness, structure, and looking after the people who can't look after themselves. It tempers your dominant color with a sense of responsibility to the group and a real discomfort with leaving anyone behind." },
   U: { name: "Blue", varc: "--u", hex: "#3a7cc4", glyph: "✶",
+       url: "https://magic.wizards.com/en/news/making-magic/my-words-blue",
        creed: "Perfection through knowledge and self-improvement.",
-       blurb: "You believe people are what they choose to become, and that knowledge is the path there. You prize learning, careful thought, and doing things right over doing them fast. Give you enough information and time, and you can solve almost anything." },
+       paras: [
+         "You believe people aren't born finished. You become whoever you decide to make of yourself, and the way you get there is by learning. Knowledge is your lever on the world: faced with a choice, your instinct is to gather information, understand how the system actually works, and find the option that holds up best — rather than the one that simply feels right in the moment.",
+         "You're willing to be slow if slow is what it takes to be correct. You'd rather take the extra time, think it all the way through, and account for what everyone else overlooked than move fast and clean up the mess later. You value the people and tools that extend what a mind can do — teachers, books, technology — and you tend to aim for the best version of a thing, not merely a version that works. Where others trust their gut, you trust the work.",
+         "That is exactly your strength: given enough information and time, you can out-think almost any problem and see the structure other people miss. Your weakness is the mirror image — you need that time. Pushed to decide before you're ready, or dragged onto someone else's tempo, you can stall, over-analyze, or watch the window close while you're still weighing your options. Patience is your sharpest edge and, every so often, the trap you fall into."
+       ],
+       sec: "You also carry a clear streak of Blue — a need to understand before you act, and a respect for getting things right over getting them done fast. It makes your dominant color more deliberate, more curious, and a good deal harder to talk into anything you haven't thought through." },
   B: { name: "Black", varc: "--b", hex: "#4b4554", glyph: "✦",
-       creed: "Power through ruthless self-interest — be your own champion.",
-       blurb: "You see the world clearly and pragmatically: no one will look out for you like you will. You believe in merit, ambition, and seizing opportunity without fear. You're willing to do what others won't to get what you want." },
+       url: "https://magic.wizards.com/en/news/making-magic/my-words-black",
+       creed: "Power through self-interest — be your own champion.",
+       paras: [
+         "You see the world without illusions: it's a hard place, no one is truly coming to save you, and the person best equipped to look after your interests is you. You don't find that bleak — you find it clarifying. Everyone deserves a champion, and you've decided to be your own. You believe people should be free to chase what they actually want, instead of shrinking themselves to fit what others expect of them.",
+         "You think in concrete terms: what do I want, what stands in the way, and what do I have to work with — and then you act, without waiting for permission or apologizing for ambition. You'll do the things other people flinch from, spend what has to be spent, and take a calculated risk when the upside is real. You can be loyal, but you don't confuse loyalty with letting yourself be used. Self-reliance, for you, is a kind of integrity: be a burden to no one, and answer for what you do.",
+         "Your strength is freedom from the limits that slow everyone else down — fewer taboos, less hesitation, and a clear eye for the opening others can't bring themselves to take. The danger is that same coin flipped over: the risks you're willing to run don't always pay off, and a refusal to depend on anyone can harden into coldness or tip into isolation. You'd rather own a hard outcome than be handed a safe one — but every now and then the bill for that comes due."
+       ],
+       sec: "There's a real vein of Black in you too — a pragmatic, self-reliant streak that won't wait around to be rescued and isn't ashamed of wanting things. It gives your dominant color teeth: a willingness to act in your own interest and to do what a situation actually demands." },
   R: { name: "Red", varc: "--r", hex: "#cb4b3e", glyph: "✷",
+       url: "https://magic.wizards.com/en/news/making-magic/my-words-red",
        creed: "Freedom and fulfillment through emotion, impulse, and action.",
-       blurb: "You believe a life worth living is one lived fully — listen to what you feel and act on it. You value passion, freedom, spontaneity, and loyalty to the people you love. You'd rather have high highs and low lows than feel nothing at all." },
+       paras: [
+         "You believe a life is measured by whether it was actually lived. Your compass is what you feel — not as something to be suppressed, but as real information about what you need. When something matters to you, the honest response is to act on it, not to talk yourself out of it. You'd rather feel a thing all the way through than go numb to keep yourself safe.",
+         "Freedom is close to sacred for you: freedom to chase what moves you, to change your mind, to live a life that's yours rather than one assembled to other people's specifications. And you're fiercely loyal to the handful of people who are truly yours — the ones who come before any abstract cause. You accept that living this way gets messy, that you'll collide with people and make mistakes, and you've made your peace with that, because the alternative is a lifetime of \"well, it could be worse.\"",
+         "Your strength is momentum and honesty — you act while others are still deliberating, you say the true thing no one else in the room will, and you gather the experiences and connections a more cautious life never reaches. The cost is that you can be short-sighted, doing the thing today that becomes tomorrow's problem. People mistake your spontaneity for recklessness; from the inside it's just a refusal to let fear make your decisions for you. Sometimes that lands you in trouble — and you'd take the trade again."
+       ],
+       sec: "You've also got a strong Red current — a refusal to overthink your way out of living, and a trust in what you feel over what you're told you ought to want. It gives your dominant color heat: quicker to act, more honest about emotion, and more loyal to the people right in front of you." },
   G: { name: "Green", varc: "--g", hex: "#3fa463", glyph: "❧",
+       url: "https://magic.wizards.com/en/news/making-magic/my-words-green",
        creed: "Acceptance of nature as it is; find and fulfill your role.",
-       blurb: "You believe the world is already whole, and wisdom is accepting it rather than fighting it. You trust instinct, tradition, and your place in something larger than yourself. You've found your answers — now you live them." }
+       paras: [
+         "You don't experience the world as something broken that needs fixing. It's already whole, and wisdom is learning to accept it rather than fight it. You trust what was there before all the arguing started — instinct, the things that have grown up over time, the customs that quietly work even when no one can quite explain why. Where others strain to become something new, you're at home being what you already are.",
+         "You think in terms of belonging and role. You're part of something larger than yourself — a community, a lineage, a living whole that holds you up as you help hold it up. You'd rather work with what's actually in front of you than tear everything down chasing a fix that may cost more than the problem it solves. You can make peace with what won't move, including hard truths other people refuse to accept, and that steadiness becomes its own kind of strength when everyone around you is spinning.",
+         "Your strength is certainty: while every other outlook is still searching, you've largely found your answers, and that gives you focus and calm. The weakness folded inside it is that same certainty pushed too far — you can lean so hard on what's familiar that you struggle when it's taken from you, and others may read your acceptance as having given up when you've actually just made peace. You know the difference, even when they don't."
+       ],
+       sec: "There's a grounded streak of Green in you too — a trust in instinct, in what has stood the test of time, and in your place within something bigger than yourself. It steadies your dominant color, trading a little restlessness for acceptance and a longer view." }
 };
 const ORDER = ["W","U","B","R","G"];
 
-/* ---------- Questions (each option scores exactly one color) ---------- */
-const QUESTIONS = [
-  { q: "What's the surest path to a good life?",
-    a: [
-      ["W","Build a fair society where everyone's needs are met."],
-      ["U","Learn all you can and become the best version of yourself."],
-      ["B","Gain the power to live entirely on your own terms."],
-      ["R","Follow your passions and squeeze every drop out of each day."],
-      ["G","Find your natural place in the world and fulfill it."]
-    ]},
-  { q: "Facing a big decision, you tend to...",
-    a: [
-      ["U","Research every option carefully before you commit."],
-      ["R","Trust your gut and act now."],
-      ["W","Weigh what's right and what the rules say."],
-      ["G","Go with what feels natural and true to you."],
-      ["B","Pick whatever moves you closest to what you want."]
-    ]},
-  { q: "What do you believe shapes who a person becomes?",
-    a: [
-      ["U","A blank slate — you become whoever you choose to be."],
-      ["G","An inborn nature and a role you grow into."],
-      ["B","Sheer will — you are whatever you fight to become."],
-      ["W","Your choices, guided by right and wrong."],
-      ["R","What you feel and do in the moment."]
-    ]},
-  { q: "Other people are best thought of as...",
-    a: [
-      ["W","A community we're all responsible for."],
-      ["B","Looking out for themselves — as everyone should."],
-      ["G","Threads in one interconnected web of life."],
-      ["R","People to connect with and share experiences."],
-      ["U","Minds full of knowledge and untapped potential."]
-    ]},
-  { q: "Your honest feeling about rules is...",
-    a: [
-      ["W","Necessary — they keep everyone safe and fair."],
-      ["R","Mostly obstacles between you and a full life."],
-      ["B","Useful when they serve me, ignorable when they don't."],
-      ["U","Good, as long as they make the system work better."],
-      ["G","I trust natural order over rules imposed by people."]
-    ]},
-  { q: "How do you feel about change?",
-    a: [
-      ["G","The world is fine as it is; change should be slow and natural."],
-      ["U","Change is how we improve toward something better."],
-      ["R","Bring it on — change keeps life exciting."],
-      ["B","I'll change whatever gets me ahead."],
-      ["W","Change carefully, to make life better for everyone."]
-    ]},
-  { q: "Your greatest strength is...",
-    a: [
-      ["U","Knowledge — I can out-think almost any problem."],
-      ["R","Speed and the nerve to act."],
-      ["W","Discipline and a steady moral compass."],
-      ["B","Relentless focus on what I want."],
-      ["G","Unshakable certainty about who I am."]
-    ]},
-  { q: "What worries you most in other people?",
-    a: [
-      ["W","Recklessness and selfishness."],
-      ["U","Acting without thinking it through."],
-      ["B","Weakness, and letting others control you."],
-      ["G","Arrogance — thinking we can master nature."],
-      ["R","Being too afraid to ever truly live."]
-    ]},
-  { q: "When conflict comes, you...",
-    a: [
-      ["R","Meet it head-on, right now."],
-      ["U","Stay patient — plan and wait for the right moment."],
-      ["B","Do whatever it takes to come out ahead."],
-      ["W","Resolve it through fair rules and justice."],
-      ["G","Rely on strength and what comes naturally."]
-    ]},
-  { q: "At the very end, what would make a life well-lived?",
-    a: [
-      ["R","That you lived fully and have great stories to tell."],
-      ["W","That you did right by others."],
-      ["B","That you achieved exactly what you set out to."],
-      ["U","That you reached your full potential."],
-      ["G","That you played your part in something larger."]
-    ]},
-  { q: "Emotions are...",
-    a: [
-      ["R","The truest guide to what you actually need."],
-      ["U","Best kept in check by reason."],
-      ["W","Important — but the group comes first."],
-      ["B","A tool: useful, but never in charge."],
-      ["G","Part of your nature, to be accepted."]
-    ]},
-  { q: "Your ideal world looks like...",
-    a: [
-      ["W","A peaceful society free of suffering."],
-      ["U","A place where everyone can reach their potential."],
-      ["B","One where you're free to become anything."],
-      ["R","Full of passion, freedom, and experience."],
-      ["G","In harmony — everything in its natural place."]
-    ]}
-];
+/* ---------- Questions ----------
+   The questions live in an external file: questions.json
+   They are loaded at startup by loadQuestions() at the bottom of this script.
+   Each question is { "q": "...", "options": [ ... ] } where each option awards
+   either one color { "color": "W", "text": "..." } or two at once (an allied-pair
+   answer) { "colors": ["W","U"], "text": "..." }.
+   Colors are W (White), U (Blue), B (Black), R (Red), G (Green). */
+let QUESTIONS = [];
 
 /* ---------- State ---------- */
 let current = 0;
-const answers = new Array(QUESTIONS.length).fill(null);
+let answers = [];   // sized to the number of questions once they load
 const card = document.getElementById("card");
 
 /* ---------- Helpers ---------- */
@@ -345,7 +291,7 @@ function renderIntro(){
 
 function renderQuestion(){
   const Q = QUESTIONS[current];
-  const opts = shuffle(Q.a);
+  const opts = shuffle(Q.options);
   const pct = Math.round((current/QUESTIONS.length)*100);
   card.className = "card fade";
   card.innerHTML = `
@@ -360,13 +306,13 @@ function renderQuestion(){
     </div>
   `;
   const box = document.getElementById("opts");
-  opts.forEach(([color,text]) => {
+  opts.forEach(opt => {
     const b = document.createElement("button");
     b.className = "option";
-    b.textContent = text;
-    if (answers[current] === color) b.style.borderColor = "var(--ink)";
+    b.textContent = opt.text;
+    if (answers[current] === opt) b.style.borderColor = "var(--ink)";
     b.onclick = () => {
-      answers[current] = color;
+      answers[current] = opt;
       if (current < QUESTIONS.length - 1){ current++; renderQuestion(); }
       else { renderResult(); }
     };
@@ -380,13 +326,19 @@ function renderQuestion(){
 /* ---------- Scoring & result logic ---------- */
 function tally(){
   const scores = { W:0,U:0,B:0,R:0,G:0 };
-  answers.forEach(c => { if(c) scores[c]++; });
+  // Each answer is the chosen option object. It either awards one color
+  // ({color:"W"}) or two at once ({colors:["W","U"]} — an allied-pair answer).
+  answers.forEach(opt => {
+    if(!opt) return;
+    if(Array.isArray(opt.colors)) opt.colors.forEach(c => { if(c in scores) scores[c]++; });
+    else if(opt.color in scores) scores[opt.color]++;
+  });
   return scores;
 }
 
 function classify(scores){
-  // sorted descending, stable by ORDER for ties
-  const ranked = ORDER.slice().sort((x,y) => scores[y]-scores[x]);
+  // sorted descending; ties broken randomly (shuffle before the stable sort)
+  const ranked = shuffle(ORDER).sort((x,y) => scores[y]-scores[x]);
   const c1 = ranked[0], c2 = ranked[1];
   const s1 = scores[c1], s2 = scores[c2];
   const gap = s1 - s2;
@@ -399,27 +351,38 @@ function classify(scores){
 
 function renderResult(){
   const scores = tally();
-  const total = QUESTIONS.length;
+  // Denominator is the actual total points awarded, not the question count —
+  // allied-pair answers award 2 points, so scores no longer sum to QUESTIONS.length.
+  const total = ORDER.reduce((s,c) => s + scores[c], 0) || 1;
   const { ranked, c1, c2, mode } = classify(scores);
   const C1 = COLORS[c1], C2 = COLORS[c2];
+
+  // render an array of paragraph strings as <p class="result-body"> blocks
+  const paras = arr => arr.map(p => `<p class="result-body">${p}</p>`).join("");
 
   let kicker, title, body;
   if (mode === "single"){
     kicker = "Your color is";
-    title = `${C1.name}`;
-    body = `<p class="result-body">${C1.blurb}</p>
-            <p class="result-body"><strong>${C1.name}'s creed:</strong> ${C1.creed}</p>`;
+    title = C1.name;
+    body = `<p class="result-creed">${C1.creed}</p>
+            ${paras(C1.paras)}`;
   } else if (mode === "primary"){
     kicker = "You are primarily";
     title = `${C1.name}, leaning ${C2.name}`;
-    body = `<p class="result-body">${C1.blurb}</p>
-            <p class="result-body">But you're not purely one color. There's a clear secondary streak of <strong>${C2.name}</strong> in you — ${C2.creed.charAt(0).toLowerCase()+C2.creed.slice(1)} That second voice shapes how your ${C1.name} side plays out.</p>`;
+    body = `<p class="result-creed">${C1.creed}</p>
+            ${paras(C1.paras)}
+            <p class="result-subhead">Your secondary color — ${C2.name}</p>
+            ${paras([C2.sec])}`;
   } else { // dual
-    kicker = "You are two colors";
+    kicker = "You are two colors, in equal measure";
     title = `${C1.name} & ${C2.name}`;
-    body = `<p class="result-body">You don't fall cleanly into one philosophy — you genuinely live by two. You're as much <strong>${C1.name}</strong> as you are <strong>${C2.name}</strong>.</p>
-            <p class="result-body"><strong>${C1.name}:</strong> ${C1.blurb}</p>
-            <p class="result-body"><strong>${C2.name}:</strong> ${C2.blurb}</p>`;
+    body = `<p class="result-body">You don't fall cleanly into one philosophy — you genuinely live by two, in roughly equal measure. Here's each of them in full.</p>
+            <p class="result-subhead">${C1.name}</p>
+            <p class="result-creed">${C1.creed}</p>
+            ${paras(C1.paras)}
+            <p class="result-subhead">${C2.name}</p>
+            <p class="result-creed">${C2.creed}</p>
+            ${paras(C2.paras)}`;
   }
 
   // swatches for the colors being reported
@@ -441,6 +404,15 @@ function renderResult(){
     </div>`;
   }).join("");
 
+  // "learn more" links to Mark Rosewater's full article for each reported color
+  const learnLinks = reported.map(c =>
+    `<a class="learn-link" href="${COLORS[c].url}" target="_blank" rel="noopener">${COLORS[c].name}'s philosophy →</a>`
+  ).join("");
+  const learnMore = `<div class="result-learn">
+      <span class="learn-label">If you'd like to learn more about ${reported.length > 1 ? "your colors" : "your color"}:</span>
+      ${learnLinks}
+    </div>`;
+
   card.className = "card fade";
   card.innerHTML = `
     <p class="result-kicker">${kicker}</p>
@@ -448,6 +420,7 @@ function renderResult(){
     <div class="result-swatches">${swatches}</div>
     ${body}
     <div class="bars">${bars}</div>
+    ${learnMore}
     <button class="btn btn-ghost" id="retake">Take the quiz again</button>
     <p class="footnote">Based on Mark Rosewater's "My Words" articles describing each color's philosophy. Your full profile is shown above — most people are a blend.</p>
   `;
@@ -465,7 +438,33 @@ function renderResult(){
 }
 
 /* ---------- Boot ---------- */
-renderIntro();
+function renderLoadError(){
+  card.className = "card fade";
+  card.innerHTML = `
+    <p class="eyebrow">Magic: The Gathering</p>
+    <h1>Couldn't load the questions</h1>
+    <p class="lede">The quiz reads its questions from <strong>questions.json</strong>, and the browser blocked that file from loading. This happens when you open <code>index.html</code> directly from your hard drive (a <code>file://</code> address) — browsers don't allow local pages to fetch other local files for security reasons.</p>
+    <p class="lede">To run it, serve the folder over a tiny local web server. From this folder, run:<br>
+    <code>python -m http.server</code><br>
+    then open <code>http://localhost:8000</code> in your browser. (Published to GitHub Pages or any web host, it just works.)</p>
+  `;
+}
+
+async function loadQuestions(){
+  try {
+    const res = await fetch("questions.json", { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    const data = await res.json();
+    QUESTIONS = data.questions;
+    answers = new Array(QUESTIONS.length).fill(null);
+    renderIntro();
+  } catch (err) {
+    console.error("Failed to load questions.json:", err);
+    renderLoadError();
+  }
+}
+
+loadQuestions();
 </script>
 </body>
 </html>

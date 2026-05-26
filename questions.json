@@ -1,0 +1,104 @@
+{
+  "questions": [
+    {
+      "q": "Which of these sounds most like you?",
+      "options": [
+        { "colors": ["W","U"], "text": "You'd rather take the extra time to do something carefully and get it right than move fast on a hunch." },
+        { "colors": ["U","B"], "text": "You tend to spot the angle everyone else missed and plan around it before it turns into a problem." },
+        { "colors": ["B","R"], "text": "You go after what you actually want, instead of adjusting to others' rules." },
+        { "colors": ["R","G"], "text": "You trust what feels true to you over advice about what you're supposed to want." },
+        { "colors": ["G","W"], "text": "You feel most like yourself as part of something bigger — a group, a cause, a belief." }
+      ]
+    },
+    {
+      "q": "At your best, you're the kind of person who...",
+      "options": [
+        { "color": "W", "text": "Makes sure the person with the least is still looked after." },
+        { "color": "U", "text": "Uses expertise to bring things closer to perfection." },
+        { "color": "B", "text": "Gets things done without waiting to be told or helped." },
+        { "color": "R", "text": "Says the true thing in the room that no one else will." },
+        { "color": "G", "text": "Stays steady while everyone else spins." }
+      ]
+    },
+    {
+      "q": "Where does a person's responsibility really lie?",
+      "options": [
+        { "color": "W", "text": "With the people around them — we're all carrying each other." },
+        { "color": "B", "text": "With themselves first; no one else carries your weight for long." },
+        { "color": "U", "text": "With getting things right, even when that's slower and harder." },
+        { "color": "G", "text": "With the role they actually have, not the one they wish they had." },
+        { "color": "R", "text": "With being honest about what they feel, and acting on it." }
+      ]
+    },
+    {
+      "q": "Laws and traditions are best understood as...",
+      "options": [
+        { "color": "W", "text": "Promises we keep so the weak aren't left at the mercy of the strong." },
+        { "color": "U", "text": "Works in progress — to be scrutinized and debated." },
+        { "color": "B", "text": "Systems of control; worth following when they're convenient to you." },
+        { "color": "G", "text": "Things that lasted because they quietly work, even when they're unpleasant." },
+        { "color": "R", "text": "A constraint on your freedom, to be ignored if that's how you feel." }
+      ]
+    },
+    {
+      "q": "When you picture doing right by people, who's actually in front of you?",
+      "options": [
+        { "color": "B", "text": "Yourself first — take real charge of your own life, so you're a burden to no one and can answer for what you do." },
+        { "color": "R", "text": "The handful who are truly yours — the people you love come before any cause." },
+        { "color": "U", "text": "People in abstract — the public, the patients, the citizens, the employees." },
+        { "color": "G", "text": "The community you belong to — the living whole that holds you up and that you help hold up." },
+        { "color": "W", "text": "Humanity - every person individually deserves your efforts." }
+      ]
+    },
+    {
+      "q": "A close friend repeats something you'd told them in confidence. When you find out, you...",
+      "options": [
+        { "color": "R", "text": "Tell them right away how much it stung — they should hear it from you while it's still raw." },
+        { "color": "W", "text": "Say plainly that it crossed a line; trust has rules, and you'd want to be held to them too." },
+        { "color": "U", "text": "Hold off reacting until you understand why they did it — there may be more to it than it looks." },
+        { "color": "B", "text": "Say little, but quietly adjust what you trust them with from here on." },
+        { "color": "G", "text": "Let it settle, and weigh it against everything they've been to you over the years." }
+      ]
+    },
+    {
+      "q": "How should wealth be distributed in society?",
+      "options": [
+        { "color": "W", "text": "It should be distributed equally. No one should go hungry, even if that means no one gets to be rich." },
+        { "color": "U", "text": "Resources should be given to those who can become more productive, and create more wealth for everyone later." },
+        { "color": "B", "text": "People should rise and fall on their own merits." },
+        { "color": "R", "text": "Just go help whoever needs it, now. Stop overthinking it." },
+        { "color": "G", "text": "It's good to distribute some wealth, but too much can cause social disruption. We must keep a careful balance." }
+      ]
+    },
+    {
+      "q": "When you look back on a good year, what made it worth it?",
+      "options": [
+        { "color": "R", "text": "That you had multiple new experiences, rather than live a boring life." },
+        { "color": "B", "text": "That you got through it on your own and came out on top of everyone else." },
+        { "color": "U", "text": "That you reached a concrete milestone you'd set for yourself." },
+        { "color": "W", "text": "That you didn't go through it alone, and didn't let others either." },
+        { "color": "G", "text": "That you discovered something new about yourself and grew into a better you." }
+      ]
+    },
+    {
+      "q": "What do people most often get wrong about you?",
+      "options": [
+        { "color": "B", "text": "They interpret your self-reliance as coldness. You just don't expect to be rescued." },
+        { "color": "W", "text": "They think you're naive for caring so much about others." },
+        { "color": "U", "text": "They mistake your responsibility and focus for being boring." },
+        { "color": "R", "text": "They call you impulsive when you're just living life." },
+        { "color": "G", "text": "They think you're self-absorbed when you're actually just peaceful." }
+      ]
+    },
+    {
+      "q": "What do you live for?",
+      "options": [
+        { "color": "R", "text": "Feeling. Excitement, love, passion, fun, laughs." },
+        { "color": "U", "text": "Improving things. To get a better education, to do a better at my job, to learn something new." },
+        { "color": "W", "text": "Creating a better world, one with more peace and less suffering." },
+        { "color": "B", "text": "Getting power, to get the things I want and protect those I care about from harm." },
+        { "color": "G", "text": "Being in harmony, with myself and the world around me. To be well and at peace." }
+      ]
+    }
+  ]
+}

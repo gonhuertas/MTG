@@ -161,4 +161,42 @@ Every pairing below is described *by both colors involved*, and the two accounts
 
 ---
 
-*Sources: the five "My Words" articles by Mark Rosewater on* Making Magic *(magic.wizards.com), one per color: [White](https://magic.wizards.com/en/news/making-magic/my-words-white), [Blue](https://magic.wizards.com/en/news/making-magic/my-words-blue), [Black](https://magic.wizards.com/en/news/making-magic/my-words-black), [Red](https://magic.wizards.com/en/news/making-magic/my-words-red), and [Green](https://magic.wizards.com/en/news/making-magic/my-words-green).*
+# Supplement: the 2015 "Revisited" articles
+
+The sections above are built from the 2025 first-person "My Words" series. In 2015, Rosewater wrote an earlier, more systematic pass on each color (the "Revisited" series), organized around six questions: what the color *desires*, the *means* it uses, what it *cares about / represents*, what it *despises*, why it likes its allies and hates its enemies, and its greatest *strength and weakness*. Most of the philosophy overlaps with what's above; collected here is the material that is genuinely additional — the one-word goals, the symbolic/mechanical associations, and several sharper conceptual distinctions.
+
+## Each color's goal in one word
+
+This is the canonical shorthand Rosewater uses:
+
+| Color | Wants | The core idea |
+|-------|-------|---------------|
+| **White** | **Peace** | A world with no unnecessary suffering — achievable only if everyone prioritizes the group. |
+| **Blue** | **Perfection** | Every person is a blank slate who can become anything; life is the lifelong project of reaching that potential. |
+| **Black** | **Power** | The one resource that guarantees control over your own life and happiness. |
+| **Red** | **Freedom** | The ability to live life doing what it feels it needs to, with no regrets. |
+| **Green** | **Acceptance** | The world already got everything right; the task is to recognize your role and embrace it. |
+
+## What each color cares about (its symbols and associations)
+
+These are the flavor and mechanical hooks each color "owns" — useful for recognizing a color by what it gravitates toward, not just its beliefs.
+
+- **White:** religion, military, law, the court system, politics, government, community, honor, chivalry, defense, self-sacrifice, cooperation, light, purity, charity, strategy, organization. White's structure splits into **moral law** (which governs how people *think* — right vs. wrong, conscience, guilt) and **civil law** (which governs how people *act* — public rules with immediate, enforced consequences).
+- **Blue:** academics, books and archives, the mind/intellect, memory, telepathy, telekinesis, time manipulation, control, manipulation, trickery, subtlety, complexity, artifice, illusion, technology and **artifacts**, man-made items, passivity, cold, and the elements of **air and water**. Blue treats knowledge as a multi-purpose tool: a means of self-improvement, a lever of *control*, a *key* to access, a form of *protection*, and a *weapon*.
+- **Black:** death, the undead, **amorality**, fear, sadness/depression, pain, torture, darkness, disease, decay/entropy, parasitism, insects and vermin, corruption, contamination, reduction, deceit, manipulation, Machiavellian "ends justify the means" thinking, individualism, calculated destruction, sacrifice (of others and, when efficient, of itself), and self-absorption.
+- **Red:** emotion (all of it, not just anger), mood swings, impulse, might (brawn over brains), violence, brutality, destruction, chaos, randomness, spontaneity, **humor**, mischief, the elements of **fire and earth**, brawling, **romance**, hedonism, and barbarism.
+- **Green:** life and birth, growth, nature and natural things, reality (vs. illusion), community, interdependence, **spiritualism**, the past, **wisdom**, ancestry, tradition, instinct, animals, and plants. Mechanically this makes Green the color of big creatures, land, and fast mana.
+
+## Sharper distinctions worth recording
+
+- **Black is "the only realist."** It frames itself not as evil but as the one color that sees the world *as it is* rather than as it wishes it to be. Key line: Black "didn't make the world greedy — the world was already greedy; Black just learned to thrive in it."
+- **Amorality, not immorality.** Black doesn't break the moral code so much as reject that morality exists at all. To Black, morality is "a human construction meant to allow the weak to justify a false position of strength" — White's most insidious invention.
+- **Free will vs. destiny.** Black and Green clash on a point the 2025 articles only imply: Black insists individuals *choose* their own paths (free will), while Green holds that your role is *predetermined* — written in your genes (destiny/determinism). Blue sits with Black here (the nature-vs-nurture axis).
+- **Knowledge vs. wisdom; future vs. past.** Blue and Green both prize learning, but Blue "looks to the future and seeks knowledge" while Green "looks to the past and seeks wisdom." Blue actively dislikes tradition and ceremony (a "slave to the past"); Green treasures them.
+- **Religion vs. spiritualism.** White and Green both value the non-tangible, but White leans on organized **religion** (a tool of moral law) while Green leans on **spiritualism** — higher forces and interconnection without the institutional structure.
+- **"Chaos" is White's word, not Red's.** Red doesn't see itself as chaotic; it sees itself as letting life run honestly and messily. "Chaos" is the label order-loving White pins on it.
+- **Several colors are their own worst enemy.** Black says outright that "the color most likely to be responsible for Black's downfall is Black" (its willingness to do anything backfires); Red's short-sightedness and refusal to take advice get it into trouble; White's rigidity leaves it unable to adapt to the unforeseen; Blue's deliberation tips into passivity; Green's reliance on its system collapses when the system (e.g., its creatures) is removed. In each case the greatest weakness is the greatest strength pushed too far.
+
+---
+
+*Sources: Mark Rosewater on* Making Magic *(magic.wizards.com). The 2025 first-person series, one per color: [White](https://magic.wizards.com/en/news/making-magic/my-words-white), [Blue](https://magic.wizards.com/en/news/making-magic/my-words-blue), [Black](https://magic.wizards.com/en/news/making-magic/my-words-black), [Red](https://magic.wizards.com/en/news/making-magic/my-words-red), [Green](https://magic.wizards.com/en/news/making-magic/my-words-green). The 2015 "Revisited" series, one per color: [White](https://magic.wizards.com/en/news/making-magic/great-white-way-revisited-2015-07-13), [Blue](https://magic.wizards.com/en/news/making-magic/true-blue-revisited-2015-07-20), [Black](https://magic.wizards.com/en/news/making-magic/black-revisited-2015-07-27), [Red](https://magic.wizards.com/en/news/making-magic/seeing-red-revisited-2015-08-03), [Green](https://magic.wizards.com/en/news/making-magic/its-not-easy-being-green-revisited-2015-08-10).*
