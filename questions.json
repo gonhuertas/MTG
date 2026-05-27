@@ -21,13 +21,23 @@
       ]
     },
     {
-      "q": "Which of these describes your view about technology?",
+      "q": "When you look back on a good year, what made it worth it?",
       "options": [
-        { "color": "U", "text": "Technology is the single most important way to build a better future." },
-        { "color": "W", "text": "Science is good but should be supervised for the benefit of everyone." },
-        { "color": "G", "text": "Too often people forget how technology can be used to destroy or exploit." },
-        { "color": "B", "text": "We should not let other people's fears of progress hold the rest of us back." },
-        { "color": "R", "text": "Innovation is best when allowed freedom for creation and self-expression." }
+        { "color": "R", "text": "That you had multiple new experiences, rather than live a boring life." },
+        { "color": "B", "text": "That you got through it on your own and came out on top of everyone else." },
+        { "color": "U", "text": "That you reached a concrete milestone you'd set for yourself." },
+        { "color": "W", "text": "That you didn't go through it alone, and didn't let others either." },
+        { "color": "G", "text": "That you discovered something new about yourself and grew into a better you." }
+      ]
+    },
+    {
+      "q": "Favorite hobby among these?",
+      "options": [
+        { "colors": ["R","U"], "text": "Arts — music, dancing, painting, theater." },
+        { "colors": ["R","G"], "text": "Gym and sports." },
+        { "colors": ["U","G"], "text": "Watching documentaries." },
+        { "colors": ["B","U"], "text": "Tweeting and reading Substacks." },
+        { "colors": ["W","G"], "text": "Community organizing." }
       ]
     },
     {
@@ -71,13 +81,13 @@
       ]
     },
     {
-      "q": "When you look back on a good year, what made it worth it?",
+      "q": "Which of these describes your view about technology?",
       "options": [
-        { "color": "R", "text": "That you had multiple new experiences, rather than live a boring life." },
-        { "color": "B", "text": "That you got through it on your own and came out on top of everyone else." },
-        { "color": "U", "text": "That you reached a concrete milestone you'd set for yourself." },
-        { "color": "W", "text": "That you didn't go through it alone, and didn't let others either." },
-        { "color": "G", "text": "That you discovered something new about yourself and grew into a better you." }
+        { "color": "U", "text": "Technology is the single most important way to build a better future." },
+        { "color": "W", "text": "Science is good but should be supervised for the benefit of everyone." },
+        { "color": "G", "text": "Too often people forget how technology can be used to destroy or exploit." },
+        { "color": "B", "text": "We should not let other people's fears of progress hold the rest of us back." },
+        { "color": "R", "text": "Innovation is best when allowed freedom for creation and self-expression." }
       ]
     },
     {
@@ -128,16 +138,6 @@
         { "color": "U", "text": "I believe what can be proven; faith without evidence isn't for me." },
         { "color": "B", "text": "A human invention — handy for comfort or control, but not the truth." },
         { "color": "R", "text": "Too many rules and limits — it just gets in the way of being who I want." }
-      ]
-    },
-    {
-      "q": "Favorite hobby among these?",
-      "options": [
-        { "colors": ["R","U"], "text": "Arts — music, dancing, painting, theater." },
-        { "colors": ["R","G"], "text": "Gym and sports." },
-        { "colors": ["U","G"], "text": "Watching documentaries." },
-        { "colors": ["B","U"], "text": "Tweeting and reading Substacks." },
-        { "colors": ["W","G"], "text": "Community organizing." }
       ]
     }
   ]
