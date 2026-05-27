@@ -56,7 +56,7 @@
         { "color": "B", "text": "Yourself first — take real charge of your own life, so you're a burden to no one and can answer for what you do." },
         { "color": "R", "text": "The handful who are truly yours — the people you love come before any cause." },
         { "color": "U", "text": "People in abstract — the public, the patients, the citizens, the employees." },
-        { "color": "G", "text": "Your community — the people whom with you share an identity or space." },
+        { "color": "G", "text": "Your community — the people with whom you share an identity or space." },
         { "color": "W", "text": "Humanity - every person individually deserves your efforts." }
       ]
     },
@@ -101,10 +101,20 @@
       ]
     },
     {
+      "q": "If there were a new pandemic, should governments quarantine their cities?",
+      "options": [
+        { "colors": ["W","U"], "text": "Quarantine everyone. Then collect enough data to slowly phase out the controls." },
+        { "colors": ["W","B"], "text": "Quarantine the sickest neighborhoods, even if it places them at a disadvantage." },
+        { "colors": ["W","R"], "text": "Encourage people to stay home voluntarily. If the disease spreads, impose quarantines." },
+        { "colors": ["B","G"], "text": "No quarantines. For society as a whole to survive, people need to continue their daily lives." },
+        { "colors": ["B","R"], "text": "No quarantines. Risk is the price of civil liberties." }
+      ]
+    },
+    {
       "q": "What do you live for?",
       "options": [
         { "color": "R", "text": "Feeling. Excitement, love, passion, fun, laughs." },
-        { "color": "U", "text": "Improving things. To get a better education, to do a better at my job, to learn something new." },
+        { "color": "U", "text": "Improving things. To get a better education, to do better at my job, to learn something new." },
         { "color": "W", "text": "Creating a better world, one with more peace and less suffering." },
         { "color": "B", "text": "Getting power, to get the things I want and protect those I care about from harm." },
         { "color": "G", "text": "Being in harmony, with myself and the world around me. To be well and at peace." }
