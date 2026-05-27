@@ -33,7 +33,7 @@
     {
       "q": "Laws and traditions are best understood as...",
       "options": [
-        { "color": "W", "text": "Promises we keep so the weak aren't left at the mercy of the strong." },
+        { "color": "W", "text": "Rules we build so the weak aren't left at the mercy of the strong." },
         { "color": "U", "text": "Works in progress — to be scrutinized and debated." },
         { "color": "B", "text": "Systems of control; worth following when they're convenient to you." },
         { "color": "G", "text": "Things that lasted because they quietly work, even when they're unpleasant." },
