@@ -129,6 +129,16 @@
         { "color": "B", "text": "A human invention — handy for comfort or control, but not the truth." },
         { "color": "R", "text": "Too many rules and limits — it just gets in the way of being who I want." }
       ]
+    },
+    {
+      "q": "Favorite hobby among these?",
+      "options": [
+        { "colors": ["R","U"], "text": "Arts — music, dancing, painting, theater." },
+        { "colors": ["R","G"], "text": "Gym and sports." },
+        { "colors": ["U","G"], "text": "Watching documentaries." },
+        { "colors": ["B","U"], "text": "Tweeting and reading Substacks." },
+        { "colors": ["W","G"], "text": "Community organizing." }
+      ]
     }
   ]
 }
