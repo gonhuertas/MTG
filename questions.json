@@ -99,6 +99,26 @@
         { "color": "B", "text": "Getting power, to get the things I want and protect those I care about from harm." },
         { "color": "G", "text": "Being in harmony, with myself and the world around me. To be well and at peace." }
       ]
+    },
+    {
+      "q": "A real opportunity is in front of you, but taking it means giving something up. What do you do?",
+      "options": [
+        { "color": "B", "text": "Pay the price — I'll sacrifice something I value, because that's just what winning costs." },
+        { "color": "G", "text": "Refuse to trade away what I've built; I'd rather grow strong enough to have both." },
+        { "color": "U", "text": "Hold off and keep my options open until a version comes along that costs me nothing." },
+        { "color": "R", "text": "Only chase it if my heart's truly in it — a clever move I feel nothing for isn't worth giving up something I love." },
+        { "color": "W", "text": "Weigh it against what I owe people — if taking it breaks a promise or lets down those counting on me, I let it go." }
+      ]
+    },
+    {
+      "q": "Which of these would you say best describes an actual weakness of yours?",
+      "options": [
+        { "color": "W", "text": "I cling to the rules even when they no longer fit, and I sweat the small stuff as much as the big." },
+        { "color": "U", "text": "I wait for perfect information and end up paralyzed while faster people get ahead of me." },
+        { "color": "B", "text": "I'll sacrifice too much chasing what I want, and sometimes pay a price that wasn't worth it." },
+        { "color": "R", "text": "I burn hot and fast, then flame out — I start strong but struggle to sustain it." },
+        { "color": "G", "text": "I'm too stubborn; I lean on what's familiar and struggle to change even when I should." }
+      ]
     }
   ]
 }

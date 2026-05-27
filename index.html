@@ -170,8 +170,8 @@
   /* selected (post-pick) state: button adopts the answer's color */
   .option.selected {
     border-color: var(--opt-color);
-    background: color-mix(in srgb, var(--opt-color) 13%, #fff);
-    box-shadow: 0 4px 16px color-mix(in srgb, var(--opt-color) 22%, transparent);
+    background: color-mix(in srgb, var(--opt-color) 30%, #fff);
+    box-shadow: inset 0 0 0 1.5px var(--opt-color), 0 6px 20px color-mix(in srgb, var(--opt-color) 40%, transparent);
     transform: none;
   }
   .option.selected .opt-glyph { width: var(--glyph-w, 24px); margin-right: 11px; opacity: 1; }
@@ -206,6 +206,9 @@
   .result-body strong { color: var(--ink); }
   .result-creed { font-size: 15px; font-style: italic; color: var(--muted); margin: -6px 0 16px; line-height: 1.5; }
   .result-subhead { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin: 28px 0 10px; padding-top: 18px; border-top: 1px solid var(--line); }
+  .result-subhead.with-swatch { display: flex; align-items: center; gap: 10px; }
+  .swatch-sm { width: 26px; height: 26px; border-radius: 7px; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; line-height: 1; flex: 0 0 auto; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.07); }
+  .swatch-sm.w { color: #6b531a; }
 
   .radar-wrap { display: flex; justify-content: center; margin: 4px 0 28px; }
   .radar { width: 100%; max-width: 400px; height: auto; }
@@ -354,7 +357,7 @@ function renderQuestion(){
       setTimeout(() => {
         if (current < QUESTIONS.length - 1){ current++; renderQuestion(); }
         else { renderResult(); }
-      }, 340);
+      }, 680);
     };
     box.appendChild(b);
   });
@@ -374,7 +377,7 @@ function styleSelected(button, opt){
   button.style.setProperty("--glyph-w", cols.length > 1 ? "46px" : "24px");
   if (cols.length > 1){
     const h1 = COLORS[cols[0]].hex, h2 = COLORS[cols[1]].hex;
-    button.style.background = `linear-gradient(90deg, color-mix(in srgb, ${h1} 14%, #fff), color-mix(in srgb, ${h2} 14%, #fff))`;
+    button.style.background = `linear-gradient(90deg, color-mix(in srgb, ${h1} 30%, #fff), color-mix(in srgb, ${h2} 30%, #fff))`;
     button.style.borderColor = h2;
   }
   const g = button.querySelector(".opt-glyph");
@@ -457,6 +460,8 @@ function renderResult(){
 
   // render an array of paragraph strings as <p class="result-body"> blocks
   const paras = arr => arr.map(p => `<p class="result-body">${p}</p>`).join("");
+  // small inline color swatch (used beside section subheadings)
+  const swatchSm = c => `<span class="swatch-sm${c === "W" ? " w" : ""}" style="background:${COLORS[c].hex}" aria-hidden="true">${COLORS[c].glyph}</span>`;
 
   let kicker, title, body;
   if (mode === "single"){
@@ -469,23 +474,25 @@ function renderResult(){
     title = C1.name;
     body = `<p class="result-creed">${C1.creed}</p>
             ${paras(C1.paras)}
-            <p class="result-subhead">Your secondary color — ${C2.name}</p>
+            <p class="result-subhead with-swatch">${swatchSm(c2)}Your secondary color — ${C2.name}</p>
             ${paras([C2.sec])}`;
   } else { // equal
     kicker = "You are two colors, in equal measure";
     title = `${C1.name} & ${C2.name}`;
     body = `<p class="result-body">Your top two colors came out tied — you don't fall cleanly into one philosophy, but genuinely live by two. Here's each of them in full.</p>
-            <p class="result-subhead">${C1.name}</p>
+            <p class="result-subhead with-swatch">${swatchSm(c1)}${C1.name}</p>
             <p class="result-creed">${C1.creed}</p>
             ${paras(C1.paras)}
-            <p class="result-subhead">${C2.name}</p>
+            <p class="result-subhead with-swatch">${swatchSm(c2)}${C2.name}</p>
             <p class="result-creed">${C2.creed}</p>
             ${paras(C2.paras)}`;
   }
 
-  // swatches for the colors being reported
+  // colors that get a "learn more" link: dominant + secondary (or just the one)
   const reported = (mode === "single") ? [c1] : [c1, c2];
-  const swatches = reported.map(c => {
+  // big swatch(es) in the header: only the dominant color, except in a true tie (show both)
+  const headerColors = (mode === "equal") ? [c1, c2] : [c1];
+  const swatches = headerColors.map(c => {
     const cc = COLORS[c];
     const cls = (c === "W") ? "swatch w" : "swatch";
     return `<div class="${cls}" style="background:${cc.hex}" title="${cc.name}">${cc.glyph}</div>`;
