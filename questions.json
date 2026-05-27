@@ -119,6 +119,16 @@
         { "color": "R", "text": "I burn hot and fast, then flame out — I start strong but struggle to sustain it." },
         { "color": "G", "text": "I'm too stubborn; I lean on what's familiar and struggle to change even when I should." }
       ]
+    },
+    {
+      "q": "What are your views on religion?",
+      "options": [
+        { "color": "W", "text": "Organized religion is a force for good — it gives people shared morals and structure." },
+        { "color": "G", "text": "More spiritual than religious — higher forces and a place to fill, no church needed." },
+        { "color": "U", "text": "I believe what can be proven; faith without evidence isn't for me." },
+        { "color": "B", "text": "A human invention — handy for comfort or control, but not the truth." },
+        { "color": "R", "text": "Too many rules and limits — it just gets in the way of being who I want." }
+      ]
     }
   ]
 }
