@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The World — Campaign Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="viewport">
+    <div id="tilt">
+      <div id="plane">
+        <canvas id="map"></canvas>
+        <canvas id="political"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- screen-space atmosphere: tilt-shift blur, vignette, warm light, film grain -->
+  <div id="dof-top" class="fx"></div>
+  <div id="dof-top2" class="fx"></div>
+  <div id="dof-bottom" class="fx"></div>
+  <div id="vignette" class="fx"></div>
+  <div id="light" class="fx"></div>
+  <div id="grain" class="fx"></div>
+
+  <div id="minimap-frame">
+    <canvas id="minimap"></canvas>
+  </div>
+
+  <div id="scalebar"><i></i><span>100 leagues</span></div>
+
+  <div id="help">
+    <b>Pan:</b> arrow keys / WASD &middot; mouse at screen edge &middot; drag
+    &nbsp;&nbsp;<b>Sprint:</b> shift
+    &nbsp;&nbsp;<b>Zoom:</b> scroll wheel
+    &nbsp;&nbsp;<b>Political map:</b> P
+  </div>
+
+  <div id="loading">
+    <div id="loading-title">The World</div>
+    <div id="loading-bar"><div id="loading-fill"></div></div>
+    <div id="loading-text">Unrolling the map…</div>
+  </div>
+
+  <script src="js/mapdata.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/provinces.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

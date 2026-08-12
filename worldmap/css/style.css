@@ -1,0 +1,216 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 100% at 50% 40%, #241a0e 0%, #120b05 100%);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#viewport {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  perspective: 1100px;         /* keep in sync with PERSPECTIVE in main.js */
+  perspective-origin: 50% 42%;
+  cursor: grab;
+}
+#viewport.dragging { cursor: grabbing; }
+
+/* Anchor point for the tilted map plane: the world point under the camera
+   is translated to this spot, then the whole plane is tilted and scaled. */
+#tilt {
+  position: absolute;
+  left: 50%;
+  top: 56%;                    /* keep in sync with ANCHOR_Y in main.js */
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+}
+
+#plane {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  will-change: transform;
+}
+
+#map {
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-shadow: 0 0 160px 60px rgba(0, 0, 0, 0.6);
+  filter: contrast(1.04) saturate(1.12);
+}
+
+/* political wash, faded in and out over the map */
+#political {
+  position: absolute;
+  left: 0;
+  top: 0;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+#political.on { opacity: 1; }
+
+/* ---------- screen-space atmosphere ---------- */
+.fx { position: fixed; pointer-events: none; }
+
+/* tilt-shift: the far (top) part of the scene is out of focus */
+#dof-top {
+  top: 0; left: 0; right: 0; height: 46%;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 25%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, black 25%, transparent 100%);
+  z-index: 4;
+}
+#dof-top2 {
+  top: 0; left: 0; right: 0; height: 24%;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+  z-index: 4;
+}
+/* and the very near (bottom) edge, slightly */
+#dof-bottom {
+  bottom: 0; left: 0; right: 0; height: 18%;
+  backdrop-filter: blur(1.6px);
+  -webkit-backdrop-filter: blur(1.6px);
+  -webkit-mask-image: linear-gradient(to top, black 0%, transparent 100%);
+  mask-image: linear-gradient(to top, black 0%, transparent 100%);
+  z-index: 4;
+}
+
+#vignette {
+  inset: 0;
+  background:
+    radial-gradient(115% 90% at 50% 42%, rgba(0,0,0,0) 52%, rgba(22, 11, 2, 0.62) 100%),
+    linear-gradient(to bottom, rgba(28, 16, 4, 0.38), rgba(0,0,0,0) 32%);
+  z-index: 5;
+}
+
+/* warm candle-light glow, like sun on the parchment */
+#light {
+  inset: 0;
+  background: radial-gradient(58% 48% at 45% 40%, rgba(255, 212, 138, 0.09), rgba(0,0,0,0) 70%);
+  mix-blend-mode: screen;
+  z-index: 6;
+}
+
+#grain {
+  inset: 0;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  z-index: 7;
+  /* background-image set from JS (generated noise tile) */
+}
+
+/* ---------- HUD ---------- */
+#help {
+  position: fixed;
+  left: 16px;
+  bottom: 14px;
+  z-index: 10;
+  font-family: "IM Fell English", Georgia, serif;
+  font-size: 14px;
+  color: #2b1c0c;
+  background: linear-gradient(#e2c894, #cfae7b);
+  border: 1px solid #6b4a24;
+  border-radius: 3px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  padding: 7px 12px;
+  opacity: 0.92;
+  transition: opacity 0.8s ease;
+}
+#help.dim { opacity: 0.18; }
+#help:hover { opacity: 0.92; }
+
+#minimap-frame {
+  position: fixed;
+  right: 16px;
+  bottom: 14px;
+  z-index: 10;
+  padding: 7px;
+  background: linear-gradient(#e2c894, #cfae7b);
+  border: 1px solid #6b4a24;
+  border-radius: 3px;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.55);
+  line-height: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+#minimap-frame.ready { opacity: 0.9; }
+#minimap-frame:hover { opacity: 1; }
+#minimap { display: block; border: 1px solid rgba(74, 48, 20, 0.6); }
+
+#scalebar {
+  position: fixed;
+  left: 16px;
+  bottom: 56px;
+  z-index: 10;
+  font-family: "IM Fell English", Georgia, serif;
+  font-size: 13px;
+  color: #e6cfa2;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.75;
+}
+#scalebar i {
+  display: block;
+  width: var(--bar, 100px);
+  height: 8px;
+  border: 1px solid #e6cfa2;
+  border-top: none;
+  background:
+    linear-gradient(to right,
+      rgba(230, 207, 162, 0.85) 0 25%, transparent 25% 50%,
+      rgba(230, 207, 162, 0.85) 50% 75%, transparent 75% 100%);
+  transition: width 0.15s ease-out;
+}
+
+/* ---------- loading ---------- */
+#loading {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: radial-gradient(120% 100% at 50% 45%, #2a1e10 0%, #100a04 100%);
+  font-family: "IM Fell English", Georgia, serif;
+  color: #d9bd8a;
+  transition: opacity 0.8s ease;
+}
+#loading.done { opacity: 0; pointer-events: none; }
+#loading-title {
+  font-family: "Uncial Antiqua", Georgia, serif;
+  font-size: 44px;
+  letter-spacing: 6px;
+  color: #e6cfa2;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+}
+#loading-bar {
+  width: 280px;
+  height: 6px;
+  border: 1px solid #6b4a24;
+  background: rgba(0,0,0,0.4);
+}
+#loading-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(to right, #a9793c, #e6cfa2);
+  transition: width 0.35s ease;
+}
+#loading-text { font-size: 15px; font-style: italic; opacity: 0.8; }
